@@ -37,7 +37,7 @@ class windows(tk.Tk):
 
         # We will now create a dictionary of frames
         self.frames = {}
-        # we'll create the frames themselves later but let's add the components to the dictionary.
+        # Add all frames to the loop 
         for F in (HomeScreen, fetalForm.FetalForm):
             frame = F(container, self)
             self.frames[F] = frame
