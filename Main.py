@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import Menu
+from tkinter import *
 import fetalForm
 from tkinter.filedialog import askopenfilename
 
@@ -8,7 +8,7 @@ class windows(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         # Adding a title to the window
-        self.wm_title("FetA.I.")
+        self.wm_title("FetA.I.: A Novel Fetal Health Classification Program Using Soft Voting with Deep and Ensemble Learning")
         self.iconbitmap("blueLogo.ico")
         
         # menu bar with buttons
@@ -18,11 +18,14 @@ class windows(tk.Tk):
         menu_bar.add_cascade(label = 'File', menu = file)
         file.add_command(label = 'Exit Program', command = self.destroy)
 
-        menu_bar.add_command(label = 'Home', command=lambda: self.show_frame(HomeScreen))
+        win = Menu(menu_bar, tearoff=0)
+        menu_bar.add_cascade(label = 'Window', menu = win)
+        win.add_command(label = 'Home Screen', command = lambda: self.show_frame(HomeScreen))
+        win.add_command(label = 'Input Field', command = lambda: self.show_frame(fetalForm.FetalForm))
 
         upload_button = Menu(menu_bar, tearoff=0)
         menu_bar.add_cascade(label = 'Upload', menu = upload_button)
-        upload_button.add_command(label = 'ML Model', command = self.upload_model)
+        upload_button.add_command(label = 'Classification Model', command = self.upload_model)
 
         self.config(menu = menu_bar) # config menu bar onto window
 
@@ -55,14 +58,18 @@ class windows(tk.Tk):
         name = askopenfilename()
         # print("--------------------------Model name-----------------------------" + name)
         fetalForm.FetalForm.set_ml_model(name)
+        self.wm_title("FetA.I.: " + name)
 
 class HomeScreen(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="Main Page")
-        label.pack(padx=10, pady=10)
+        label = tk.Label(self, text="FetA.I: Fetal Health Classification", font=("Arial", 25))
+        label.pack(padx=10, pady=110)
 
-        # We use the switch_window_button in order to call the show_frame() method as a lambda function
+        author = tk.Label(self, text="Authors: Richard Xu, Yifu Zuo", font=("Arial", 14))
+        author.pack(padx=10, pady=0)
+
+        # Creates a start window button for the welcome screen
         switch_window_button = tk.Button(
             self,
             text="Start",
