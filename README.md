@@ -1,8 +1,8 @@
 ﻿# FetAI
 ## Introduction
 ## To run the program
-1. Download the dist folder to your PC. 
-2. Click on the FetAI.exe file.
+1. Download the dist folder, as well as the classifier model, to your PC. 
+2. Run the FetAI.exe file.
 3. Open the application and upload the classifier model from your computer. 
 ## Install Instructions
 1. Download zip
